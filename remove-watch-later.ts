@@ -24,6 +24,7 @@ function createButtonToToggle() {
   button.innerHTML = "Toggle";
   button.onclick = function () {
     getElements();
+    addDeleteButtons();
   };
   document.body.appendChild(button);
 }
@@ -31,23 +32,33 @@ function createButtonToToggle() {
 function getElements() {
   const elName = "ytd-playlist-video-renderer";
   documents = document.getElementsByTagName(elName);
-
-  handleElements();
 }
 
-function handleElements() {
-  /* documents.forEach((el) => { */
-  /*   const tabIndex = 0 */
-  /*   const propertyName = "tabindex" */
-  /*   const selector = el.querySelector(`[${propertyName}=${tabIndex}]`) */
-  /*   console.log(`selector ${selector}`) */
-  /**/
-  /* }); */
+function addDeleteButtons() {
+  for (let index = 0; index < documents.length; index++) {
+    const doc = documents[index];
+    createDeleteButton(doc);
+  }
+}
 
-  const el = documents[0];
-  /* const elem = el.getElementsByTagName('menu') */
+function createDeleteButton(el: Element) {
+  const button = document.createElement("button");
+  button.style.position = "relative";
+  button.style.top = "0px";
+  button.style.left = "25px";
+  button.style.backgroundColor = "red";
+  button.style.color = "white";
+  button.style.padding = "10px";
+  button.style.border = "none";
+  button.style.zIndex = "9999";
+  button.innerHTML = "Delete";
+  button.onclick = function () {
+    handleDeleteVideo(el);
+  };
+  el.appendChild(button);
+}
 
-  console.log(el);
+function handleDeleteVideo(el: Element) {
   const dupa = el.querySelector("[id=menu]");
   if (!dupa) return;
   const iconButton = dupa.getElementsByTagName(
@@ -71,4 +82,11 @@ function handleElements() {
   /* const item = el.getElementsByTagName(tagName); */
 }
 
+// @ts-ignore
+/* onElementReady( */
+/*   "ytd-playlist-video-renderer.ytd-playlist-video-list-renderer", */
+/*   { findOnce: false }, */
+/*   addPlaylistVideoDeleteButton, */
+/* ); */
+/**/
 main();

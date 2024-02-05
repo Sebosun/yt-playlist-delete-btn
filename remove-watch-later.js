@@ -1,7 +1,6 @@
 /* global onElementReady, queryForElements:true */
 "use strict";
 var documents;
-var INNER_YOUTUBE_API_KEY = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
 function main() {
     createButtonToToggle();
 }
@@ -19,25 +18,37 @@ function createButtonToToggle() {
     button.innerHTML = "Toggle";
     button.onclick = function () {
         getElements();
+        addDeleteButtons();
     };
     document.body.appendChild(button);
 }
 function getElements() {
     var elName = "ytd-playlist-video-renderer";
     documents = document.getElementsByTagName(elName);
-    handleElements();
 }
-function handleElements() {
-    /* documents.forEach((el) => { */
-    /*   const tabIndex = 0 */
-    /*   const propertyName = "tabindex" */
-    /*   const selector = el.querySelector(`[${propertyName}=${tabIndex}]`) */
-    /*   console.log(`selector ${selector}`) */
-    /**/
-    /* }); */
-    var el = documents[0];
-    /* const elem = el.getElementsByTagName('menu') */
-    console.log(el);
+function addDeleteButtons() {
+    for (var index = 0; index < documents.length; index++) {
+        var doc = documents[index];
+        createDeleteButton(doc);
+    }
+}
+function createDeleteButton(el) {
+    var button = document.createElement("button");
+    button.style.position = "relative";
+    button.style.top = "0px";
+    button.style.left = "25px";
+    button.style.backgroundColor = "red";
+    button.style.color = "white";
+    button.style.padding = "10px";
+    button.style.border = "none";
+    button.style.zIndex = "9999";
+    button.innerHTML = "Delete";
+    button.onclick = function () {
+        handleDeleteVideo(el);
+    };
+    el.appendChild(button);
+}
+function handleDeleteVideo(el) {
     var dupa = el.querySelector("[id=menu]");
     if (!dupa)
         return;
@@ -53,4 +64,11 @@ function handleElements() {
     /* const tagName = "tp-yt-iron-dropdown"; */
     /* const item = el.getElementsByTagName(tagName); */
 }
+// @ts-ignore
+/* onElementReady( */
+/*   "ytd-playlist-video-renderer.ytd-playlist-video-list-renderer", */
+/*   { findOnce: false }, */
+/*   addPlaylistVideoDeleteButton, */
+/* ); */
+/**/
 main();
