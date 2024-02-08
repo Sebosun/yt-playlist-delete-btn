@@ -1,0 +1,25 @@
+{
+  "name": "user-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "remove-watch-later.js",
+  "scripts": {
+    "dev": "node utils/watchForFileChanges.js",
+    "compile": "tsc src/index.ts --outDir dist/",
+    "lint": "eslint src/index.ts",
+    "format": "prettier --write src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.16"
+  }
+}

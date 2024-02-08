@@ -1,11 +1,11 @@
 /* global onElementReady, queryForElements:true */
 "use strict";
-var documents;
+let documents;
 function main() {
     createButtonToToggle();
 }
 function createButtonToToggle() {
-    var button = document.createElement("button");
+    const button = document.createElement("button");
     /* style button in bottom left corner */
     button.style.position = "absolute";
     button.style.bottom = "10px";
@@ -23,17 +23,17 @@ function createButtonToToggle() {
     document.body.appendChild(button);
 }
 function getElements() {
-    var elName = "ytd-playlist-video-renderer";
+    const elName = "ytd-playlist-video-renderer";
     documents = document.getElementsByTagName(elName);
 }
 function addDeleteButtons() {
-    for (var index = 0; index < documents.length; index++) {
-        var doc = documents[index];
+    for (let index = 0; index < documents.length; index++) {
+        const doc = documents[index];
         createDeleteButton(doc);
     }
 }
 function createDeleteButton(el) {
-    var button = document.createElement("button");
+    const button = document.createElement("button");
     button.style.position = "relative";
     button.style.top = "0px";
     button.style.left = "25px";
@@ -42,6 +42,7 @@ function createDeleteButton(el) {
     button.style.padding = "10px";
     button.style.border = "none";
     button.style.zIndex = "9999";
+    button.style.cursor = "pointer";
     button.innerHTML = "Delete";
     button.onclick = function () {
         handleDeleteVideo(el);
@@ -49,14 +50,15 @@ function createDeleteButton(el) {
     el.appendChild(button);
 }
 function handleDeleteVideo(el) {
-    var dupa = el.querySelector("[id=menu]");
+    const dupa = el.querySelector("[id=menu]");
     if (!dupa)
         return;
-    var iconButton = dupa.getElementsByTagName("yt-icon-button")[0];
+    const iconButton = dupa.getElementsByTagName("yt-icon-button")[0];
     iconButton.click();
-    // @ts-ignore
-    onElementReady(".style-scope .ytd-menu-popup-renderer", { findOnce: false }, function (menuButton) {
-        console.log(menuButton);
+    // @ts-expect-error - Library imported via cdn
+    onElementReady(".style-scope .ytd-menu-popup-renderer", { findOnce: false }, 
+    // @ts-expect-error - Library imported via cdn
+    (menuButton) => {
         if (menuButton.textContent.includes("Remove from")) {
             menuButton.click();
         }
@@ -64,11 +66,4 @@ function handleDeleteVideo(el) {
     /* const tagName = "tp-yt-iron-dropdown"; */
     /* const item = el.getElementsByTagName(tagName); */
 }
-// @ts-ignore
-/* onElementReady( */
-/*   "ytd-playlist-video-renderer.ytd-playlist-video-list-renderer", */
-/*   { findOnce: false }, */
-/*   addPlaylistVideoDeleteButton, */
-/* ); */
-/**/
 main();

@@ -13,12 +13,12 @@ function createButtonToToggle() {
   const button = document.createElement("button");
 
   /* style button in bottom left corner */
-  button.style.position = "absolute";
+  button.style.position = "fixed";
   button.style.bottom = "10px";
   button.style.left = "10px";
   button.style.zIndex = "9999";
-  button.style.backgroundColor = "red";
-  button.style.color = "white";
+  button.style.backgroundColor = "#fa6";
+  button.style.color = "black";
   button.style.padding = "10px";
   button.style.border = "none";
   button.innerHTML = "Toggle";
@@ -45,12 +45,13 @@ function createDeleteButton(el: Element) {
   const button = document.createElement("button");
   button.style.position = "relative";
   button.style.top = "0px";
-  button.style.left = "25px";
+  button.style.right = "100px";
   button.style.backgroundColor = "red";
   button.style.color = "white";
   button.style.padding = "10px";
   button.style.border = "none";
   button.style.zIndex = "9999";
+  button.style.cursor = "pointer";
   button.innerHTML = "Delete";
   button.onclick = function () {
     handleDeleteVideo(el);
@@ -66,12 +67,12 @@ function handleDeleteVideo(el: Element) {
   )[0] as HTMLButtonElement;
   iconButton.click();
 
-  // @ts-ignore
+  // @ts-expect-error - Library imported via cdn
   onElementReady(
     ".style-scope .ytd-menu-popup-renderer",
     { findOnce: false },
+    // @ts-expect-error - Library imported via cdn
     (menuButton) => {
-      console.log(menuButton);
       if (menuButton.textContent.includes("Remove from")) {
         menuButton.click();
       }
@@ -82,11 +83,4 @@ function handleDeleteVideo(el: Element) {
   /* const item = el.getElementsByTagName(tagName); */
 }
 
-// @ts-ignore
-/* onElementReady( */
-/*   "ytd-playlist-video-renderer.ytd-playlist-video-list-renderer", */
-/*   { findOnce: false }, */
-/*   addPlaylistVideoDeleteButton, */
-/* ); */
-/**/
 main();
