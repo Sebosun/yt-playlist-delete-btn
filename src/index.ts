@@ -18,7 +18,7 @@ function createButtonToToggle() {
   button.style.left = "10px";
   button.style.zIndex = "9999";
   button.style.backgroundColor = "#fa6";
-  button.style.color = "black";
+  button.style.color = "red";
   button.style.padding = "10px";
   button.style.border = "none";
   button.innerHTML = "Toggle";
@@ -67,20 +67,17 @@ function handleDeleteVideo(el: Element) {
   )[0] as HTMLButtonElement;
   iconButton.click();
 
-  // @ts-expect-error - Library imported via cdn
+  // @ts-ignore
   onElementReady(
     ".style-scope .ytd-menu-popup-renderer",
     { findOnce: false },
-    // @ts-expect-error - Library imported via cdn
+    // @ts-ignore
     (menuButton) => {
       if (menuButton.textContent.includes("Remove from")) {
         menuButton.click();
       }
     },
   );
-
-  /* const tagName = "tp-yt-iron-dropdown"; */
-  /* const item = el.getElementsByTagName(tagName); */
 }
 
 main();

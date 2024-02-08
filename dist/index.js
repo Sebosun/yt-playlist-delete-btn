@@ -12,7 +12,7 @@ function createButtonToToggle() {
     button.style.left = "10px";
     button.style.zIndex = "9999";
     button.style.backgroundColor = "#fa6";
-    button.style.color = "black";
+    button.style.color = "red";
     button.style.padding = "10px";
     button.style.border = "none";
     button.innerHTML = "Toggle";
@@ -55,15 +55,13 @@ function handleDeleteVideo(el) {
         return;
     var iconButton = dupa.getElementsByTagName("yt-icon-button")[0];
     iconButton.click();
-    // @ts-expect-error - Library imported via cdn
+    // @ts-ignore
     onElementReady(".style-scope .ytd-menu-popup-renderer", { findOnce: false }, 
-    // @ts-expect-error - Library imported via cdn
+    // @ts-ignore
     function (menuButton) {
         if (menuButton.textContent.includes("Remove from")) {
             menuButton.click();
         }
     });
-    /* const tagName = "tp-yt-iron-dropdown"; */
-    /* const item = el.getElementsByTagName(tagName); */
 }
 main();

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node utils/watchForFileChanges.js",
     "compile": "tsc src/index.ts --outDir dist/",
+    "deploy": "tsc src/index.ts --outDir dist/",
     "lint": "eslint src/index.ts",
     "format": "prettier --write src/index.ts",
     "typecheck": "tsc --noEmit"
